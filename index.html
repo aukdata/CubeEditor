@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Cube Editor</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+	<link rel="stylesheet" type="text/css" href="../libraries/dhtmlxSuite_v51_std/codebase/dhtmlx.css">
+	<link href="./css/font-awesome.min.css" rel="stylesheet">
+
+	<link href="style.css" rel="stylesheet" type="text/css">
+
+
+	<script src="./three/three.js"></script>
+	<script src="./three/Projector.js"></script>
+	<script src="./three/CanvasRenderer.js"></script>
+
+	<script type="text/javascript" src="../libraries/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="../libraries/mousetrap.min.js"></script>
+
+	<script type="text/javascript" src="../libraries/dhtmlxSuite_v51_std/codebase/dhtmlx.js"></script>
+
+	<script type="text/javascript" src="core.js"></script>
+	<script type="text/javascript" src="viewer.js"></script>
+	<script type="text/javascript" src="editor.js"></script>
+	<script type="text/javascript" src="ribbon.js"></script>
+
+	<script>
+		var userAgent = window.navigator.userAgent.toLowerCase();
+		if (userAgent.indexOf("chrome") == -1) {
+  		alert("This page is designed for Chrome. This browser is not supported.");
+		}
+		var log = console.log;
+	</script>
+</head>
+
+<body>
+<div id="container">
+	<div id="ribbon"></div>
+
+	<div id="frame_viewer" class="module"></div>
+
+	<div id="frame_editor" class="module">
+		<p id="mes_not_selected">Press <i class="fa fa-plus"></i> to add a new frame;<br/>select an item from the left list.</p>
+
+		<div id="editor">
+			<form>
+				<input id="layer1" class="layer_button" type="button" value="layer1" onclick="editor.setLayer(0);">
+				<input id="layer2" class="layer_button" type="button" value="layer2" onclick="editor.setLayer(1);">
+				<input id="layer3" class="layer_button" type="button" value="layer3" onclick="editor.setLayer(2);">
+				<input id="layer4" class="layer_button" type="button" value="layer4" onclick="editor.setLayer(3);">
+			</form>
+
+			<table id="table_grid">
+				<tr>
+					<th class="grid" id="grid00"></th><th class="grid" id="grid10"></th><th class="grid" id="grid20"></th><th class="grid" id="grid30"></th>
+				</tr>
+				<tr>
+					<th class="grid" id="grid01"></th><th class="grid" id="grid11"></th><th class="grid" id="grid21"></th><th class="grid" id="grid31"></th>
+				</tr>
+				<tr>
+					<th class="grid" id="grid02"></th><th class="grid" id="grid12"></th><th class="grid" id="grid22"></th><th class="grid" id="grid32"></th>
+				</tr>
+				<tr>
+					<th class="grid" id="grid03"></th><th class="grid" id="grid13"></th><th class="grid" id="grid23"></th><th class="grid" id="grid33"></th>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div id="frame_list" class="module">
+		<form id="manipulater">
+			<input id="button_add_frame" type="button" value="&#xf067;" onclick='core.add();'/>
+			<input id="button_remove_frame" type="button" value="&#xf00d;" onclick='core.remove();'/>
+			<input id="button_move_up_frame" type="button" value="&#xf077;" onclick='core.listview.moveUp(core.listview.getSelected());'/>
+			<input id="button_move_down_frame" type="button" value="&#xf078;" onclick='core.listview.moveDown(core.listview.getSelected());'/>
+		</form>
+
+		<div id="data_container"></div>
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+{
+	"tabs":[
+		{
+			"id":"tab_home",
+			"text":"home",
+			"active":true,
+			"items":[
+				{
+					"type":"block", "text":"File", "list":[
+						{"id":"save", "type":"button", "text":"Save", "img":"fa fa-save", "imgdis":"fa fa-save", "isbig":true},
+						{"id":"new", "type":"button", "text":"New", "img":"fa fa-file-o", "imgdis":"fa fa-file-o"},
+						{"id":"open", "type":"button", "text":"Open", "img":"fa fa-folder-open-o", "imgdis":"fa fa-folder-open-o"},
+						{"type":"newLevel"},
+						{"id":"export", "type":"button", "text":"Export selection", "img":"fa fa-sign-out", "imgdis":"fa fa-sign-out"},
+						{"id":"import", "type":"button", "text":"Import", "img":"fa fa-sign-in", "imgdis":"fa fa-sign-in"}
+					]
+				},
+				{
+					"type":"block", "text":"Clipboard", "list":[
+						{"id":"paste", "type":"button", "text":"Paste", "img":"fa fa-paste", "imgdis":"fa fa-paste", "isbig":true },
+						{"id":"copy", "type":"button", "text":"Copy", "img":"fa fa-copy", "imgdis":"fa fa-copy"},
+						{"id":"cut", "type":"button", "text":"Cut", "img":"fa fa-cut", "imgdis":"fa fa-cut"}
+					]
+				},
+				{
+					"type":"block", "text":"Edit", "list":[
+						{"id":"undo", "type":"button", "text":"Undo", "img":"fa fa-mail-reply", "imgdis":"fa fa-mail-reply", "isbig":true},
+						{"id":"redo", "type":"button", "text":"Redo", "img":"fa fa-mail-forward", "imgdis":"fa fa-mail-forward", "isbig":true }
+					]
+				},
+				{
+					"type":"block", "text":"View", "list":[
+						{"id":"play", "type":"buttonTwoState", "text":"Play", "img":"fa fa-play", "imgdis":"fa fa-play", "isbig":true},
+					]
+				}
+			]
+		},
+		{
+			"id":"tab_sequence",
+			"text":"sequence",
+			"items":[
+				{
+					"type":"block", "text":"Block 3", "mode":"rows", "list":[
+						{"type":"button", "text":"copy", "img":"18/copy.gif"},
+					]
+				}
+			]
+		},
+		{
+			"id":"tab_frame",
+			"text":"frame",
+			"items":[
+				{
+					"type":"block", "text":"Block 3", "mode":"rows", "list":[
+						{"type":"button", "text":"copy", "img":"18/copy.gif"},
+					]
+				}
+			]
+		},
+		{
+			"id":"tab_layer",
+			"text":"layer",
+			"items":[
+				{
+					"type":"block", "text":"Block 3", "mode":"rows", "list":[
+						{"type":"button", "text":"copy", "img":"18/copy.gif"},
+					]
+				}
+			]
+		}
+	]
+}

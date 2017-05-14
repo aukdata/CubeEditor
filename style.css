@@ -1,0 +1,152 @@
+
+* {
+	user-select: none;
+}
+
+body {
+	background-color: lightgray;
+}
+
+#container {
+	width: 1310px;
+	height: auto;
+	margin: 0 auto;
+}
+
+div.module {
+	background-color: white;
+	margin: 5px;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+
+#frame_viewer {
+	width: 400px;
+	height: 400px;
+	float: left;
+}
+
+
+#frame_editor {
+	width: 420px;
+	height: 445px;
+	float: left;
+}
+
+#editor {
+	visibility: hidden;
+}
+
+.layer_button {
+	margin-bottom: 5px;
+
+	background-color: white;
+	border-radius: 5px;
+	border: solid thin lightgray;
+}
+
+#layer1 {
+	background-color: lightgray;
+}
+
+#mes_not_selected {
+	text-align:center;
+	color: lightgray;
+	display: inline;
+}
+
+th.grid {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	box-shadow: black 1px 1px 1px 1px;
+}
+
+
+
+#frame_list {
+	float: left;
+	width: 400px;
+	height: auto;
+}
+
+#data_container {
+	margin-top: 10px;
+	width: auto;
+	height: 500px;
+	border: solid thin lightgray;
+}
+
+#button_add_frame {
+	margin-top: 5px;
+	text-align: ceter;
+	line-height: 50px;
+  top: 50%;
+
+	width: 50px;
+	height: 50px;
+	border: none;
+	border-radius: 50%;
+
+	background-color: limegreen;
+	color: white;
+	font-size: xx-large;
+	font-family: "FontAwesome";
+
+	transition-duration: 300ms;
+}
+#button_add_frame:hover {
+	background-color: lime;
+
+	transition-duration: 300ms;
+}
+#button_add_frame:active {
+	box-shadow: black 1px 1px 1px 1px;
+	background-color: forestgreen;
+	color: lightgray;
+
+	transition-duration: 0ms;
+}
+
+#button_remove_frame {
+	margin-top: 5px;
+	float: right;
+	text-align:center;
+	position: relative;
+  top: 50%;
+
+	width: 30px;
+	height: 30px;
+	border: none;
+	border-radius: 50%;
+
+	background-color: crimson;
+	color: white;
+	font-size: large;
+	font-family: "FontAwesome";
+
+	transition-duration: 300ms;
+}
+#button_remove_frame:hover {
+	background-color: orangered;
+
+	transition-duration: 300ms;
+}
+#button_remove_frame:active {
+	box-shadow: black 1px 1px 1px 1px;
+	background-color: darkred;
+	color: lightgray;
+
+	transition-duration: 0ms;
+}
+
+#button_move_up_frame {
+	background-color: white;
+	font-family: "FontAwesome";
+}
+
+#button_move_down_frame {
+	background-color: white;
+	font-family: "FontAwesome";
+}
