@@ -5,22 +5,21 @@ class FrameCore{
 		this.modified = false;
 
 		this.clipboard = [[]];
-		this.history = [[[]]];
 		this.playing = false;
 
 		var that = this;
 		document.addEventListener("DOMContentLoaded", function(e) {
 			that.listview = new dhtmlXList({
-				container: "data_container",
-				auto_scroll: true,
-				edit: false,
-				drag: true,
-				select: "multiselect",
-				type: {
-					template: "<span class='dhx_single'>#label#</span>",
-					height: 22,
-					padding: 2,
-					margin: 0
+				container : "data_container",
+				auto_scroll : true,
+				edit : false,
+				drag : true,
+				select : "multiselect",
+				type : {
+					template : "<span class='dhx_single'>#label#</span>",
+					height : 22,
+					padding : 2,
+					margin : 0
 				}
 			});
 
@@ -73,34 +72,63 @@ class FrameCore{
 					"0x" + ("0000" + l[2].toString(16)).slice(-4) + ", " + "0x" + ("0000" + l[3].toString(16)).slice(-4);
 
 				this.listview.add({
-					label: text,
-					data: l
+					label : text,
+					data : l
 				}, index);
 
+				this.setModified(true, {
+					operation : "add",
+					frames : [{
+						id : this.listview.idByIndex(index),
+						data : null
+					}]
+				});
 
 			}else if(typeof l[0] === "object") {
+				var obj = {
+					operation : "add",
+					frames : []
+				}
 
 				for(var v of l) {
 					var text = "0x" + ("0000" + v[0].toString(16)).slice(-4) + ", " + "0x" + ("0000" + v[1].toString(16)).slice(-4) + ", " +
 						"0x" + ("0000" + v[2].toString(16)).slice(-4) + ", " + "0x" + ("0000" + v[3].toString(16)).slice(-4);
 
 					this.listview.add({
-						label: text,
-						data: v
+						label : text,
+						data : v
 					}, index);
+
+					obj.frames.push({
+						id : this.listview.idByIndex(index),
+						data : null
+					});
+
 					index++;
 				}
-			}
 
-			this.setModified(true);
+				this.setModified(true, obj);
+			}
 		}
 	}
 	remove() {
-		var sel = this.listview.getSelected();
+		var sel = this.listview.getSelected(true);
+		var obj = {
+			operation : "remove",
+			frames : []
+		}
+
+		for(var v of sel) {
+			obj.frames.push({
+				id : v,
+				data : this.listview.get(v).data
+			});
+		}
+
 		this.listview.unselectAll();
 		this.listview.remove(sel);
 
-		this.setModified(true);
+		this.setModified(true, obj);
 	}
 
 	get(id) {
@@ -134,11 +162,18 @@ class FrameCore{
 			"0x" + ("0000" + l[2].toString(16)).slice(-4) + ", " + "0x" + ("0000" + l[3].toString(16)).slice(-4);
 
 		var v = this.listview.get(id);
+
+		this.setModified(true, {
+			operation : "set",
+			frames : [{
+				id : id,
+				data : v.data
+			}]
+		});
+
 		v.label = text;
 		v.data = l;
 		this.listview.set(id, v);
-
-		this.setModified(true);
 	}
 
 	read(onread) {
@@ -260,6 +295,7 @@ class FrameCore{
 		}
 	}
 
+
 	copy() {
 		this.clipboard = this.getSelected();
 	}
@@ -269,14 +305,20 @@ class FrameCore{
 		}
 	}
 
-	undo() {
 
+	undo() {
+		var obj = editHistory.undo();
+		if(obj != null) {
+
+		}
 	}
 	redo() {
 
 	}
 
-	setModified(flag) {
+	setModified(flag, obj) {
+		editHistory.push(obj);
+
 		this.modified = flag;
 		document.title = (this.modified ? "*" : "") + this.filename + " - Cube Editor";
 	}
