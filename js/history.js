@@ -1,10 +1,15 @@
-class EditHistory {
+class History {
 	constructor() {
 		this.buffer = [];
 		this.count = 0;
 	}
 
 	push(obj) {
+		var length = this.buffer.length;
+		if(this.count > 0) {
+			this.buffer = this.buffer.slice(0, length - this.count);
+			this.count = 0;
+		}
 		this.buffer.push(obj);
 	}
 
@@ -12,7 +17,7 @@ class EditHistory {
 		var length = this.buffer.length;
 		++this.count;
 
-		if(lenght >= this.count) {
+		if(length - this.count >= 0) {
 			return this.buffer[length - this.count];
 		}else{
 			return null;
@@ -29,5 +34,3 @@ class EditHistory {
 		}
 	}
 }
-
-var editHistory = new EditHistory();

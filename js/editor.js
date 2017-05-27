@@ -9,7 +9,9 @@ class FrameEditor {
 
 		var that = this;
 		document.addEventListener("DOMContentLoaded", function(e) {
-			core.listview.attachEvent("onSelectChange", function() {that.change();});
+			operator.frames.listview.attachEvent("onSelectChange", function() {
+				that.change();
+			});
 
 			var table = document.getElementById("table_grid");
 			var changeGrid = function(e) {
@@ -34,6 +36,7 @@ class FrameEditor {
 				table.addEventListener("mousemove", changeGrid, false);
 			}, false);
 			table.addEventListener("mouseup", function(e) {
+				operator.set(that.frame);
 				that.prevClicked.x = -1;
 				that.prevClicked.y = -1;
 				table.removeEventListener("mousemove", changeGrid, false);
@@ -50,8 +53,7 @@ class FrameEditor {
 				if(dt < 50) return false;
 
 				if(e.deltaX <= -120 || 120 <= e.deltaX) {
-					var selIds = core.listview.getSelected(true);
-					if(selIds.length == 1) {
+					if(operator.frames.getSelectedIds().length == 1) {
 						var layer = that.layer + (e.deltaX < 0 ? -1 : 1);
 						if(layer < 0) layer = 0;
 						if(3 < layer) layer = 3;
@@ -61,13 +63,13 @@ class FrameEditor {
 				}
 
 				if(e.deltaY <= -120 || 120 <= e.deltaY) {
-					var selIds = core.listview.getSelected(true);
+					var selIds = operator.frames.getSelectedIds();
 					if(selIds.length == 1) {
-						var index = core.listview.indexById(selIds[0]) + (e.deltaY < 0 ? -1 : 1);
+						var index = operator.frames.indexById(selIds[0]) + (e.deltaY < 0 ? -1 : 1);
 
-						if(0 <= index && index < core.listview.dataCount()) {
-							core.listview.unselectAll();
-							core.listview.select(core.listview.idByIndex(index));
+						if(0 <= index && index < operator.frames.count()) {
+							operator.frames.listview.unselectAll();
+							operator.frames.listview.select(operator.frames.idByIndex(index));
 						}
 					}
 				}
@@ -76,13 +78,14 @@ class FrameEditor {
 	}
 
 	change() {
-		var sel = core.listview.getSelected(true);
+		var sel = operator.frames.getSelectedIds();
 		if(sel.length == 1) {
-			if(core.listview.exists(sel[0])) {
-				this.frame = core.get(sel[0]);
+			if(operator.frames.listview.exists(sel[0])) {
+				this.frame = operator.frames.getData(sel[0]);
 			}else{
 				this.frame = [0, 0, 0, 0];
 			}
+			this.update();
 
 			$("#editor").css("visibility", "visible");
 			$("#mes_not_selected").css("display", "none");
@@ -92,7 +95,6 @@ class FrameEditor {
 			$("#editor").css("visibility", "hidden");
 			$("#mes_not_selected").css("display", "inline");
 		}
-		this.update();
 	}
 
 	update() {
@@ -107,6 +109,7 @@ class FrameEditor {
 				}
 			}
 		}
+
 		viewer.set(this.frame);
 	}
 
@@ -114,7 +117,7 @@ class FrameEditor {
 		return (this.frame[this.layer] & (0x0001 << (4 * z + x))) != 0;
 	}
 	set(x, z, val) {
-		if(core.listview.getSelected(true).length == 1) {
+		if(operator.frames.getSelectedIds().length == 1) {
 			var id = "#grid" + x + z;
 
 			if(val) {
@@ -125,8 +128,6 @@ class FrameEditor {
 				$(id).css("background-color", "white");
 			}
 
-			var sel = core.listview.getSelected();
-			core.set(sel, this.frame);
 			viewer.set(this.frame);
 		}
 	}

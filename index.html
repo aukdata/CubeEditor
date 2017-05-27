@@ -25,7 +25,8 @@
 	<link type="text/css" rel="stylesheet" href="style.css">
 
 	<script type="text/javascript" src="./js/history.js"></script>
-	<script type="text/javascript" src="./js/core.js"></script>
+	<script type="text/javascript" src="./js/frame.js"></script>
+	<script type="text/javascript" src="./js/operator.js"></script>
 	<script type="text/javascript" src="./js/viewer.js"></script>
 	<script type="text/javascript" src="./js/editor.js"></script>
 	<script type="text/javascript" src="./js/ribbon.js"></script>
@@ -75,10 +76,10 @@
 
 	<div id="frame_list" class="module">
 		<form id="manipulater">
-			<input id="button_add_frame" type="button" value="&#xf067;" onclick='core.add();'/>
-			<input id="button_remove_frame" type="button" value="&#xf00d;" onclick='core.remove();'/>
-			<input id="button_move_up_frame" type="button" value="&#xf077;" onclick='core.listview.moveUp(core.listview.getSelected());'/>
-			<input id="button_move_down_frame" type="button" value="&#xf078;" onclick='core.listview.moveDown(core.listview.getSelected());'/>
+			<input id="button_add_frame" type="button" value="&#xf067;" onclick="operator.add();"/>
+			<input id="button_remove_frame" type="button" value="&#xf00d;" onclick="operator.remove();"/>
+			<input id="button_move_up_frame" type="button" value="&#xf077;" onclick="operator.move('up');"/>
+			<input id="button_move_down_frame" type="button" value="&#xf078;" onclick="operator.move('down');"/>
 		</form>
 
 		<div id="data_container"></div>

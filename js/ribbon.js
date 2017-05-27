@@ -10,33 +10,41 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	ribbon.attachEvent("onClick", function(id) {
 		switch(id) {
 		case "new":
-			core.new();
+			operator.new();
 			break;
 		case "save":
-			core.save();
+			operator.save();
 			break;
 		case "open":
-			core.read(core.load);
+			operator.read(operator.load);
 			break;
 		case "export":
-			core.exportFrames();
+			operator.exportFrames();
 			break;
 		case "import":
-			core.read(core.importFrames);
-			break;
-		case "play":
-			core.play();
+			operator.read(operator.importFrames);
 			break;
 
 		case "paste":
-			core.paste();
+			operator.paste();
 			break;
 		case "copy":
-			core.copy();
+			operator.copy();
 			break;
 		case "cut":
-			core.copy();
-			core.remove();
+			operator.copy();
+			operator.remove();
+			break;
+
+		case "undo":
+			operator.undo();
+			break;
+		case "redo":
+			operator.redo();
+			break;
+
+		case "play":
+			operator.play();
 			break;
 
 		case "inverse":
@@ -47,22 +55,18 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	ribbon.attachEvent("onStateChange", function(id, state) {
 		switch(id) {
 		case "play":
-			core.play(state);
+			operator.play(state);
 			break;
 		}
 	});
 
 	Mousetrap.bind('shift+n', function(){
-		core.new();
+		operator.new();
 	});
 	Mousetrap.bind('shift+o', function(){
-		core.load();
+		operator.read(operator.load);
 	});
 	Mousetrap.bind('shift+s', function(){
-		core.save();
-	});
-	Mousetrap.bind('shift+t', function(){
-		core.listview.refresh();
-		log(core.listview.get(core.listview.last()));
+		operator.save();
 	});
 }, false);
