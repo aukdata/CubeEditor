@@ -27,6 +27,29 @@ div.module {
 	float: left;
 }
 
+#demo {
+	z-index: 0;
+	position: absolute;
+
+	width: 400px;
+	height: 400px;
+}
+
+#button_toggle_rotation {
+	z-index: 1;
+	position: absolute;
+	line-height: 25px;
+
+	width: 30px;
+	height: 30px;
+	border: solid 1px lightgray;
+	border-radius: 50%;
+
+	background-color: white;
+	font-size: large;
+	font-family: "FontAwesome";
+}
+
 
 #frame_editor {
 	width: 420px;
@@ -142,11 +165,13 @@ th.grid {
 }
 
 #button_move_up_frame {
+	border: solid 1px lightgray;
 	background-color: white;
 	font-family: "FontAwesome";
 }
 
 #button_move_down_frame {
+	border: solid 1px lightgray;
 	background-color: white;
 	font-family: "FontAwesome";
 }

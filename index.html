@@ -44,17 +44,23 @@
 <div id="container">
 	<div id="ribbon"></div>
 
-	<div id="frame_viewer" class="module"></div>
+	<div id="frame_viewer" class="module">
+		<div id="demo"></div>
+
+		<form id="rotation">
+			<input id="button_toggle_rotation" type="button" value="&#xf0e2;" onclick="viewer.toggleRotation()"/>
+		</form>
+	</div>
 
 	<div id="frame_editor" class="module">
 		<p id="mes_not_selected">Press <i class="fa fa-plus"></i> to add a new frame;<br/>select an item from the left list.</p>
 
 		<div id="editor">
 			<form>
-				<input id="layer1" class="layer_button" type="button" value="layer1" onclick="editor.setLayer(0);">
-				<input id="layer2" class="layer_button" type="button" value="layer2" onclick="editor.setLayer(1);">
-				<input id="layer3" class="layer_button" type="button" value="layer3" onclick="editor.setLayer(2);">
-				<input id="layer4" class="layer_button" type="button" value="layer4" onclick="editor.setLayer(3);">
+				<input id="layer1" class="layer_button" type="button" value="layer1" onclick="editor.setLayer(0);"/>
+				<input id="layer2" class="layer_button" type="button" value="layer2" onclick="editor.setLayer(1);"/>
+				<input id="layer3" class="layer_button" type="button" value="layer3" onclick="editor.setLayer(2);"/>
+				<input id="layer4" class="layer_button" type="button" value="layer4" onclick="editor.setLayer(3);"/>
 			</form>
 
 			<table id="table_grid">

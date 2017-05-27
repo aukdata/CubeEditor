@@ -4,23 +4,19 @@ class FrameViewer {
 		this.scene = {};
 		this.renderer = {};
 
-		this.targetRotation = 0;
-		this.targetRotationOnMouseDown = 0;
-		this.cameraAngle = 0.0;
-
-		this.mouseX = 0;
-		this.mouseXOnMouseDown = 0;
-
-		this.windowHalfX = window.innerWidth / 2;
+		this.targetRotation = Math.PI * 5 / 16;
+		this.cameraAngle = this.targetRotation;
 
 		this.matGray = {};
 		this.matGreen = {};
 
 		this.spheres = [];
 
+		this.rot = false;
+
 		var that = this;
 		document.addEventListener("DOMContentLoaded", function(e) {
-			var container = document.getElementById("frame_viewer");
+			var container = document.getElementById("demo");
 
 			that.camera = new THREE.PerspectiveCamera(70, 1.0, 1, 1000);
 			that.scene = new THREE.Scene();
@@ -60,13 +56,22 @@ class FrameViewer {
 		}
 	}
 
+	toggleRotation() {
+		this.rot = !this.rot;
+
+		$("#button_toggle_rotation").css("background-color", this.rot ? "lightgray" : "white");
+	}
+
 	update() {
 		var that = this;
 		requestAnimationFrame(function() {
 			that.update();
 		});
 
-		this.targetRotation += 0.01;
+		if(this.rot) {
+			this.targetRotation += 0.01;
+		}
+
 		this.cameraAngle += (this.targetRotation - this.cameraAngle) * 0.05;
 		this.camera.position.set(400 * -Math.sin(this.cameraAngle), 300, 400 * Math.cos(this.cameraAngle));
 		this.camera.lookAt({x: 0, y: -60, z: 0});
